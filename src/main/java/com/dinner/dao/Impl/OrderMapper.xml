@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dinner.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.dinner.model.Order" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, user_id, name, num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.dinner.model.OrderKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.dinner.model.OrderKey" >
+    delete from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dinner.model.Order" >
+    insert into order (order_id, user_id, name, 
+      num)
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dinner.model.Order" >
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dinner.model.Order" >
+    update order
+    <set >
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dinner.model.Order" >
+    update order
+    set num = #{num,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>
