@@ -1,7 +1,9 @@
 package com.dinner.dao;
 
 import com.dinner.model.Admin;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdminMapper {
     int deleteByPrimaryKey(String id);
 

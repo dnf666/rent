@@ -1,7 +1,9 @@
 package com.dinner.dao;
 
 import com.dinner.model.Finance;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FinanceMapper {
     int deleteByPrimaryKey(Integer orderId);
 

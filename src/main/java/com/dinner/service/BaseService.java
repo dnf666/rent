@@ -30,7 +30,7 @@ public interface BaseService<T> {
      * @return 对象
      * @
      */
-    T selectByPrimaryKey(T key) ;
+    T selectByPrimaryKey(T key) throws Exception;
 
     /**
      * 更新成员

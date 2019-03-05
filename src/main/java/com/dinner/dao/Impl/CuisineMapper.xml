@@ -10,7 +10,7 @@
     name, url, price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from cuisine
     where name = #{name,jdbcType=VARCHAR}
@@ -68,4 +68,21 @@
       price = #{price,jdbcType=DOUBLE}
     where name = #{name,jdbcType=VARCHAR}
   </update>
+  <select id="countCuisinesByKeys" parameterType="com.dinner.model.Cuisine" resultType="java.lang.Integer">
+    select count(*)
+    from cuisine where 1 = 1
+    <if test="name != null">
+      and cuisine.name like '%${name}%'
+    </if>
+  </select>
+  <select id="filter" parameterType="com.dinner.model.Cuisine" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from cuisine where 1 = 1
+    <if test="cuisine.name != null">
+      and cuisine.name like '%${cuisine.name}%'
+    </if>
+    <if test="pager.offset!=null and pager.limit!=null">
+      limit #{pager.offset},#{pager.limit};
+    </if>
+  </select>
 </mapper>

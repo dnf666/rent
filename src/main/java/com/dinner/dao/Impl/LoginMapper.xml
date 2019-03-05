@@ -13,7 +13,7 @@
     phone, name, sex, birthday, address, password
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from login
     where phone = #{phone,jdbcType=VARCHAR}
@@ -23,10 +23,10 @@
     where phone = #{phone,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.dinner.model.Login" >
-    insert into login (phone, name, sex, 
+    insert into login (phone, name, sex,
       birthday, address, password
       )
-    values (#{phone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+    values (#{phone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
       #{birthday,jdbcType=DATE}, #{address,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
   </insert>
@@ -103,4 +103,39 @@
       password = #{password,jdbcType=VARCHAR}
     where phone = #{phone,jdbcType=VARCHAR}
   </update>
+  <select id="countloginsByKeys" parameterType="com.dinner.model.Login" resultType="java.lang.Integer">
+    select count(*)
+    from login where 1 = 1
+    <if test="phone != null">
+      and login.phone like '%${phone}%'
+    </if>
+    <if test="name != null">
+      and login.name like '%${name}%'
+    </if>
+    <if test="sex != null">
+      and login.sex = #{sex}
+    </if>
+    <if test="address != null">
+      and login.address like '%${address}%'
+    </if>
+     </select>
+  <select id="filter" parameterType="com.dinner.model.Login" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from login where 1 = 1
+    <if test="login.phone != null">
+      and login.phone like '%${login.phone}%'
+    </if>
+    <if test="login.name != null">
+      and login.name like '%${login.name}%'
+    </if>
+    <if test="login.sex != null">
+      and login.sex = #{login.sex}
+    </if>
+    <if test="login.address != null">
+      and login.address like '%${login.address}%'
+    </if>
+    <if test="pager.offset!=null and pager.limit!=null">
+      limit #{pager.offset},#{pager.limit};
+    </if>
+  </select>
 </mapper>

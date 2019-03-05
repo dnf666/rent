@@ -32,8 +32,17 @@ public class LoginController {
      */
     @PostMapping(value = "regist")
     public ResponseEntity register(@RequestBody Login login) {
-        loginService.insert(login);
-        return new ResponseEntity(200, "register success", "");
+        int result = loginService.insert(login);
+        return new ResponseEntity(result, "register success", "");
+    }
+    @PostMapping(value = "login")
+    public ResponseEntity login(@RequestBody Login login) {
+        try {
+            Login result = loginService.selectByPrimaryKey(login);
+            return new ResponseEntity(1, "register success", result);
+        }catch (Exception e){
+            return new ResponseEntity(0, e.getMessage(), "");
+        }
     }
     @GetMapping(value = "regist")
     public ResponseEntity get(Login login) {

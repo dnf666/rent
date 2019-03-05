@@ -1,7 +1,12 @@
 package com.dinner.dao;
 
 import com.dinner.model.Cuisine;
+import com.dinner.util.Pager;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface CuisineMapper {
     int deleteByPrimaryKey(String name);
 
@@ -14,4 +19,8 @@ public interface CuisineMapper {
     int updateByPrimaryKeySelective(Cuisine record);
 
     int updateByPrimaryKey(Cuisine record);
+
+    Integer countCuisinesByKeys(Cuisine cuisine);
+
+    List<Cuisine> filter(@Param("pager") Pager<Cuisine> pager, @Param("cuisine") Cuisine cuisine);
 }
