@@ -11,7 +11,7 @@
     order_id, user_id, date, price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from finance
     where order_id = #{orderId,jdbcType=INTEGER}
@@ -21,9 +21,9 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.dinner.model.Finance" >
-    insert into finance (order_id, user_id, date, 
+    insert into finance (order_id, user_id, date,
       price)
-    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{date,jdbcType=DATE}, 
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{date,jdbcType=DATE},
       #{price,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.dinner.model.Finance" >
@@ -79,4 +79,17 @@
       price = #{price,jdbcType=DOUBLE}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
+  <select id="selectByDateDesc" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from finance
+    where date &gt;= #{startTime,jdbcType=DATE} AND date &lt;= #{endTime,jdbcType=DATE}
+    order by date desc limit #{pager.offset},#{pager.limit}  ;
+  </select>
+  <select id="countByDateDesc" resultType="java.lang.Integer">
+    select count(*)
+    from finance
+    where date &gt;= #{startTime,jdbcType=DATE} AND date &lt;= #{endTime,jdbcType=DATE}
+  </select>
+
 </mapper>
