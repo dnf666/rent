@@ -23,4 +23,6 @@ public interface CuisineMapper {
     Integer countCuisinesByKeys(Cuisine cuisine);
 
     List<Cuisine> filter(@Param("pager") Pager<Cuisine> pager, @Param("cuisine") Cuisine cuisine);
+
+    List<Cuisine> selectAll();
 }

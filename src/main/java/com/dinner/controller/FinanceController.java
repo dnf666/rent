@@ -5,6 +5,7 @@ import com.dinner.service.FinanceService;
 import com.dinner.util.Pager;
 import com.dinner.util.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,5 +61,6 @@ public class FinanceController {
         pager.setData(list);
         return new ResponseEntity(1, "find finance success", pager);
     }
+
 
 }

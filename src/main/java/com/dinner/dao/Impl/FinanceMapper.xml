@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dinner.dao.FinanceMapper" >
   <resultMap id="BaseResultMap" type="com.dinner.model.Finance" >
-    <id column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="date" property="date" jdbcType="DATE" />
     <result column="price" property="price" jdbcType="DOUBLE" />
   </resultMap>
@@ -16,14 +16,10 @@
     from finance
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from finance
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="com.dinner.model.Finance" >
     insert into finance (order_id, user_id, date,
       price)
-    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{date,jdbcType=DATE},
+    values (#{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{date,jdbcType=DATE},
       #{price,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.dinner.model.Finance" >

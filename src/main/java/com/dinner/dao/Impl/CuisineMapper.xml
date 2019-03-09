@@ -15,6 +15,11 @@
     from cuisine
     where name = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cuisine
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from cuisine
     where name = #{name,jdbcType=VARCHAR}

@@ -1,33 +1,18 @@
 package com.dinner.model;
 
-public class OrderKey {
-    private Integer orderId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-    private Integer userId;
+@ToString
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class OrderKey {
+    private Long orderId;
+
+    private String userId;
 
     private String name;
-
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
 }

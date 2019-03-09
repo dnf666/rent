@@ -29,6 +29,9 @@ public class CuisineServiceImpl implements CuisineService {
     private CuisineMapper cuisineMapper;
     @Override
     public int deleteByPrimaryKey(Cuisine key) {
+        Cuisine cuisine = cuisineMapper.selectByPrimaryKey(key.getName());
+        String url = cuisine.getUrl();
+
         return cuisineMapper.deleteByPrimaryKey(key.getName());
     }
 
@@ -70,6 +73,38 @@ public class CuisineServiceImpl implements CuisineService {
         cuisine.setUrl("/photo/" + fileName);
         cuisineMapper.insert(cuisine);
     }
+
+    @Override
+    public List<Cuisine> selectAll() {
+        return cuisineMapper.selectAll();
+    }
+
+    @Override
+    public void updateCuisine(Cuisine cuisine, MultipartFile file, HttpServletRequest request) throws IOException {
+        String originalFilename = file.getOriginalFilename();
+        Objects.requireNonNull(originalFilename);
+        String suffix = originalFilename.substring(originalFilename.lastIndexOf('.'));
+        String fileName = System.currentTimeMillis() + suffix;
+        deleteOldPhoto(cuisine,request);
+        savePhoto(file,request,fileName);
+        cuisine.setUrl("/photo/" + fileName);
+        cuisineMapper.updateByPrimaryKeySelective(cuisine);
+    }
+
+    @Override
+    public int deletePhotoAndCuisine(Cuisine cuisine, HttpServletRequest request) throws IOException {
+        deleteOldPhoto(cuisine,request);
+        return cuisineMapper.deleteByPrimaryKey(cuisine.getName());
+    }
+
+    private void deleteOldPhoto(Cuisine cuisine,HttpServletRequest request) throws IOException {
+        Cuisine cuisine1 = cuisineMapper.selectByPrimaryKey(cuisine.getName());
+        String url = cuisine1.getUrl();
+        String filePath = request.getSession().getServletContext().getRealPath(url);
+        Path path = Paths.get(filePath);
+        Files.deleteIfExists(path);
+    }
+
     private void savePhoto(MultipartFile file, HttpServletRequest request, String fileName) throws IOException {
         String filePath = request.getSession().getServletContext().getRealPath("/photo/" + fileName);
         checkFileExist(filePath);

@@ -56,8 +56,8 @@ public class FinanceServiceImpl implements FinanceService {
         pager.setRecordSize(total);
         List<Finance> list =  financeMapper.selectByDateDesc(pager,endTime,startTime);
         for (Finance finance : list){
-            Integer phone = finance.getUserId();
-            Login login = loginMapper.selectByPrimaryKey(phone.toString());
+            String phone = finance.getUserId();
+            Login login = loginMapper.selectByPrimaryKey(phone);
             finance.setName(login.getName());
         }
         return list;

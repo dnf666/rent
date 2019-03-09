@@ -1,20 +1,23 @@
 package com.dinner.dao;
 
 import com.dinner.model.Order;
-import com.dinner.model.OrderKey;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface OrderMapper {
-    int deleteByPrimaryKey(OrderKey key);
+    int deleteByPrimaryKey(Order key);
 
     int insert(Order record);
 
     int insertSelective(Order record);
 
-    Order selectByPrimaryKey(OrderKey key);
+    Order selectByPrimaryKey(Order key);
 
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<Order> selectByOrderIdAndUserId(Order order);
 }

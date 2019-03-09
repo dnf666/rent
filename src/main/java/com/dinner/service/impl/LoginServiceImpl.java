@@ -56,7 +56,7 @@ public class LoginServiceImpl implements LoginService {
         if (total != 0) {
             return loginMapper.filter(pager, login);
         } else {
-            throw new Exception("未填写过滤条件");
+            throw new Exception("数据为空");
         }
     }
 }

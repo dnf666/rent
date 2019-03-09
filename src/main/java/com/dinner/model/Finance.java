@@ -11,9 +11,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Finance {
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer userId;
+    private String userId;
 
     private Date date;
 

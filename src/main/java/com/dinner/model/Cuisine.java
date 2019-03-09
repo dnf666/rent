@@ -15,6 +15,7 @@ public class Cuisine {
     private String url;
 
     private Double price;
+    private Integer num = 0;
 
 
 }
