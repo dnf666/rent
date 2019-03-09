@@ -43,7 +43,7 @@ public class CuisineController {
             List<Cuisine> list = cuisineService.filter(pager, cuisine);
             for (Cuisine cuisine1 : list) {
                 String url = cuisine1.getUrl();
-                cuisine1.setUrl(url);
+                cuisine1.setUrl("/dinner/"+url);
             }
             pager.setData(list);
             return new ResponseEntity(1, "find cuisine success", pager);
@@ -57,7 +57,7 @@ public class CuisineController {
         List<Cuisine> list = cuisineService.selectAll();
         for (Cuisine cuisine1 : list) {
             String url = cuisine1.getUrl();
-            cuisine1.setUrl(url);
+            cuisine1.setUrl("/dinner"+url);
         }
         Pager<Cuisine> pager = new Pager<>();
         pager.setRecordSize(list.size());

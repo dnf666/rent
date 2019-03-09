@@ -27,23 +27,31 @@ public class LoginController {
 
     /**
      * 注册
+     *
      * @param login 数据
      * @return 注册结果
      */
     @PostMapping(value = "regist")
     public ResponseEntity register(@RequestBody Login login) {
-        int result = loginService.insert(login);
-        return new ResponseEntity(result, "register success", "");
+        try {
+            int result = loginService.insert(login);
+            return new ResponseEntity(result, "register success", "");
+        } catch (Exception e) {
+            return new ResponseEntity(0, "该电话已注册", "");
+
+        }
     }
+
     @PostMapping(value = "login")
     public ResponseEntity login(@RequestBody Login login) {
         try {
             Login result = loginService.selectByPrimaryKey(login);
             return new ResponseEntity(1, "register success", result);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity(0, e.getMessage(), "");
         }
     }
+
     @GetMapping(value = "regist")
     public ResponseEntity get(Login login) {
         loginService.insert(login);
