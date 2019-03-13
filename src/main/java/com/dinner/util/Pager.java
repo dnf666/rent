@@ -16,10 +16,19 @@ public class Pager<T> implements Serializable {
     private int pageTotal = 0;
     //总数据量
     private int recordSize = 0;
+    private double total = 0;
     //？
     private Map<String, Object> params = new HashMap();
     //返回该页的数据
     private List<T> data = new ArrayList();
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
     public Pager() {
     }

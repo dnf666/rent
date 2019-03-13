@@ -40,6 +40,31 @@ INSERT INTO `admin` VALUES ('admin','admin');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cost`
+--
+
+DROP TABLE IF EXISTS `cost`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cost` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `price` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cost`
+--
+
+LOCK TABLES `cost` WRITE;
+/*!40000 ALTER TABLE `cost` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cost` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cuisine`
 --
 
@@ -86,7 +111,6 @@ CREATE TABLE `finance` (
 
 LOCK TABLES `finance` WRITE;
 /*!40000 ALTER TABLE `finance` DISABLE KEYS */;
-INSERT INTO `finance` VALUES ('1552144468142','15023324935','2019-03-09',813);
 /*!40000 ALTER TABLE `finance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +163,6 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES ('1552144468142','15023324935','熏肉',3),('1552144468142','15023324935','虾球',1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -152,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-09 23:17:15
+-- Dump completed on 2019-03-13 17:32:56
