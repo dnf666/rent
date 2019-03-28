@@ -52,6 +52,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * 之前只创建了post方法，系统报错，然后就加了个get方法，没用
+     * @param login
+     * @return
+     */
     @GetMapping(value = "regist")
     public ResponseEntity get(Login login) {
         loginService.insert(login);

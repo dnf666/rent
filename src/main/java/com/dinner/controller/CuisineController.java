@@ -31,6 +31,13 @@ public class CuisineController {
     @Resource
     private CuisineService cuisineService;
 
+    /**
+     * 菜单管理的过滤
+     * @param cuisine
+     * @param page
+     * @param size
+     * @return
+     */
     @PostMapping("/filter")
     public ResponseEntity cuisineFilter(@RequestBody Cuisine cuisine,
                                         Integer page,
@@ -52,6 +59,10 @@ public class CuisineController {
         }
     }
 
+    /**
+     * 点菜时显示菜单
+     * @return
+     */
     @GetMapping("filter")
     public ResponseEntity selectAll() {
         List<Cuisine> list = cuisineService.selectAll();

@@ -52,7 +52,13 @@ public class CuisineServiceImpl implements CuisineService {
 
     @Override
     public List<Cuisine> filter(Pager<Cuisine> pager, Cuisine cuisine) throws Exception {
+        Integer total = cuisineMapper.countCuisinesByKeys(cuisine);
+        pager.setRecordSize(total);
+        if (total != 0) {
             return cuisineMapper.filter(pager, cuisine);
+        }else{
+            throw new Exception("数据为空");
+        }
     }
 
     @Override
