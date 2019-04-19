@@ -32,7 +32,7 @@ public class CuisineController {
     private CuisineService cuisineService;
 
     /**
-     * 菜单管理的过滤
+     *房源管理的过滤
      * @param cuisine
      * @param page
      * @param size
@@ -50,7 +50,7 @@ public class CuisineController {
             List<Cuisine> list = cuisineService.filter(pager, cuisine);
             for (Cuisine cuisine1 : list) {
                 String url = cuisine1.getUrl();
-                cuisine1.setUrl("/dinner/"+url);
+                cuisine1.setUrl("/rent/"+url);
             }
             pager.setData(list);
             return new ResponseEntity(1, "find cuisine success", pager);
@@ -68,7 +68,7 @@ public class CuisineController {
         List<Cuisine> list = cuisineService.selectAll();
         for (Cuisine cuisine1 : list) {
             String url = cuisine1.getUrl();
-            cuisine1.setUrl("/dinner"+url);
+            cuisine1.setUrl("/rent/"+url);
         }
         Pager<Cuisine> pager = new Pager<>();
         pager.setRecordSize(list.size());
@@ -94,8 +94,8 @@ public class CuisineController {
 
     @PostMapping("delCuisine")
     public ResponseEntity deleteCuisineInfoByCuisineName(@RequestBody Cuisine cuisine, HttpServletRequest request) throws IOException {
-        if (cuisine.getName() == null || cuisine.getName().length() == 0) {
-            return new ResponseEntity<>(0, "菜名为空", "");
+        if (cuisine.getLocation() == null || cuisine.getLocation().length() == 0) {
+            return new ResponseEntity<>(0, "位置为空", "");
         }
         int result = cuisineService.deletePhotoAndCuisine(cuisine,request);
         return new ResponseEntity<>(1, "删除成功", result);

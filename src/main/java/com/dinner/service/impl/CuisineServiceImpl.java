@@ -29,10 +29,7 @@ public class CuisineServiceImpl implements CuisineService {
     private CuisineMapper cuisineMapper;
     @Override
     public int deleteByPrimaryKey(Cuisine key) {
-        Cuisine cuisine = cuisineMapper.selectByPrimaryKey(key.getName());
-        String url = cuisine.getUrl();
-
-        return cuisineMapper.deleteByPrimaryKey(key.getName());
+        return cuisineMapper.deleteByPrimaryKey(key.getLocation());
     }
 
     @Override
@@ -67,9 +64,7 @@ public class CuisineServiceImpl implements CuisineService {
         Objects.requireNonNull(originalFilename);
         String suffix = originalFilename.substring(originalFilename.lastIndexOf('.'));
         String fileName = System.currentTimeMillis() + suffix;
-
         savePhoto(file, request, fileName);
-
         cuisine.setUrl("/photo/" + fileName);
         cuisineMapper.insert(cuisine);
     }
@@ -94,11 +89,11 @@ public class CuisineServiceImpl implements CuisineService {
     @Override
     public int deletePhotoAndCuisine(Cuisine cuisine, HttpServletRequest request) throws IOException {
         deleteOldPhoto(cuisine,request);
-        return cuisineMapper.deleteByPrimaryKey(cuisine.getName());
+        return cuisineMapper.deleteByPrimaryKey(cuisine.getLocation());
     }
 
     private void deleteOldPhoto(Cuisine cuisine,HttpServletRequest request) throws IOException {
-        Cuisine cuisine1 = cuisineMapper.selectByPrimaryKey(cuisine.getName());
+        Cuisine cuisine1 = cuisineMapper.selectByPrimaryKey(cuisine.getLocation());
         String url = cuisine1.getUrl();
         String filePath = request.getSession().getServletContext().getRealPath(url);
         Path path = Paths.get(filePath);

@@ -1,93 +1,96 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dinner.dao.CuisineMapper" >
-  <resultMap id="BaseResultMap" type="com.dinner.model.Cuisine" >
-    <id column="name" property="name" jdbcType="VARCHAR" />
-    <result column="url" property="url" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    name, url, price
+<mapper namespace="com.dinner.dao.CuisineMapper">
+    <resultMap id="BaseResultMap" type="com.dinner.model.Cuisine">
+        <id column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="room_owner" property="roomOwner" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="others" property="others" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+  location,url,room_owner,phone,others,price
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from cuisine
-    where name = #{name,jdbcType=VARCHAR}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from cuisine
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from cuisine
-    where name = #{name,jdbcType=VARCHAR}
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from room
+        where location = #{location,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from room
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from room
+    where location = #{location,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.dinner.model.Cuisine" >
-    insert into cuisine (name, url, price
+    <insert id="insert" parameterType="com.dinner.model.Cuisine">
+    insert into room (location, url, room_owner,phone,others,price
       )
-    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}
+    values (#{location,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{roomOwner,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{others,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dinner.model.Cuisine" >
-    insert into cuisine
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="url != null" >
-        url,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dinner.model.Cuisine" >
-    update cuisine
-    <set >
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where name = #{name,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dinner.model.Cuisine" >
-    update cuisine
+    <update id="updateByPrimaryKeySelective" parameterType="com.dinner.model.Cuisine">
+        update room
+        <set>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="roomOwner != null">
+                room_owner = #{roomOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="others != null">
+                others = #{others,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where location= #{location,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dinner.model.Cuisine">
+    update room
     set url = #{url,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DOUBLE}
-    where name = #{name,jdbcType=VARCHAR}
+      price = #{price,jdbcType=DOUBLE},
+              room_owner = #{roomOwner,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        others = #{others,jdbcType=VARCHAR}
+    where location = #{location,jdbcType=VARCHAR}
   </update>
-  <select id="countCuisinesByKeys" parameterType="com.dinner.model.Cuisine" resultType="java.lang.Integer">
-    select count(*)
-    from cuisine where 1 = 1
-    <if test="name != null">
-      and cuisine.name like '%${name}%'
-    </if>
-  </select>
-  <select id="filter" parameterType="com.dinner.model.Cuisine" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/>
-    from cuisine where 1 = 1
-    <if test="cuisine.name != null">
-      and cuisine.name like '%${cuisine.name}%'
-    </if>
-    <if test="pager.offset!=null and pager.limit!=null">
-      limit #{pager.offset},#{pager.limit};
-    </if>
-  </select>
+    <select id="countCuisinesByKeys" parameterType="com.dinner.model.Cuisine" resultType="java.lang.Integer">
+        select count(*)
+        from room where 1 = 1
+        <if test="location != null">
+            and room.location like '%${location}%'
+        </if>
+        <if test="roomOwner != null">
+            and room.room_owner like '%${roomOwner}%'
+        </if>
+        <if test="others != null">
+            and room.others like '%${others}%'
+        </if>
+    </select>
+    <select id="filter" parameterType="com.dinner.model.Cuisine" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from room where 1 = 1
+      <if test="cuisine.location != null">
+            and room.location like '%${cuisine.location}%'
+        </if>
+        <if test="cuisine.roomOwner != null">
+            and room.room_owner like '%${cuisine.roomOwner}%'
+        </if>
+        <if test="cuisine.others != null">
+            and room.others like '%${cuisine.others}%'
+        </if>
+        <if test="pager.offset!=null and pager.limit!=null">
+            limit #{pager.offset},#{pager.limit};
+        </if>
+    </select>
 </mapper>

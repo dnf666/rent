@@ -14,7 +14,7 @@
     <mvc:annotation-driven/>
     <!--ComboPooledDataSource 是数据库连接池,封装数据库连接-->
     <bean name="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/dinner?useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/rent?useUnicode=true&amp;characterEncoding=utf-8"/>
         <property name="user" value="root"/>
         <property name="password" value="root"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>

@@ -82,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
             Order order = new Order();
             order.setOrderId(timestemp);
             order.setUserId(phone);
-            order.setName(cuisine.getName());
+            order.setName(cuisine.getLocation());
             order.setNum(cuisine.getNum());
             orderMapper.insert(order);
         }

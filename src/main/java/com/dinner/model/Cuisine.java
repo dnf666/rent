@@ -10,12 +10,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Cuisine {
-    private String name;
+    private String location;
 
     private String url;
 
     private Double price;
     private Integer num = 0;
-
+    private String roomOwner;
+    private String phone;
+    private String others;
 
 }
