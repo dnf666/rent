@@ -14,8 +14,6 @@ import javax.annotation.Resource;
 
 /**
  * created on 2019-03-03
- *
- * @author dailinfu
  */
 
 @CrossOrigin(origins = "*", maxAge = 3600)

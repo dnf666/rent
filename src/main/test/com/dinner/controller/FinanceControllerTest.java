@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 /**
  * created on 2019-03-06
  *
- * @author dailinfu
+
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

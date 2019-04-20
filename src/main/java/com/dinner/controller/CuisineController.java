@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * created on 2019-03-04
  *
- * @author dailinfu
  */
 
 @CrossOrigin(origins = "*", maxAge = 3600)
