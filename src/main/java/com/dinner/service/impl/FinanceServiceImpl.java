@@ -5,7 +5,6 @@ import com.dinner.dao.LoginMapper;
 import com.dinner.model.Finance;
 import com.dinner.model.Login;
 import com.dinner.service.FinanceService;
-import com.dinner.util.ArithUtils;
 import com.dinner.util.Pager;
 import org.springframework.stereotype.Service;
 
@@ -53,15 +52,14 @@ public class FinanceServiceImpl implements FinanceService {
         Date startTime = new Date(lastWeek);
         simpleDateFormat.format(startTime);
         simpleDateFormat.format(endTime);
+        int total = financeMapper.countByDateDesc(endTime,startTime);
         List<Finance> list =  financeMapper.selectByDateDesc(pager,endTime,startTime);
-        double total = 0d;
-        for (Finance finance : list){
-            String phone = finance.getUserId();
-            total = ArithUtils.add(total,finance.getPrice());
+        for (Finance finance:list) {
+            String phone = finance.getPhone();
             Login login = loginMapper.selectByPrimaryKey(phone);
             finance.setName(login.getName());
         }
-        pager.setTotal(total);
+        pager.setRecordSize(total);
         return list;
     }
 

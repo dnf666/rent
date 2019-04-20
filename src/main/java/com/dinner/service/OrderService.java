@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public interface OrderService extends BaseService<Order>{
-    boolean submit(List<Cuisine> orders, String phone);
+    boolean submit(Cuisine orders, String phone);
 
     List<Order> selectByOrderIdAndUserId(Order order);
 }

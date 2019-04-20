@@ -29,17 +29,17 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("submit")
-    public ResponseEntity submit(@RequestBody List<Cuisine> orders, String phone) {
+    public ResponseEntity submit(@RequestBody Cuisine orders, String phone) {
         boolean result = false;
         if (Strings.isNullOrEmpty(phone)) {
             return new ResponseEntity(0, "phone is null", "");
         }
-        if (orders == null || orders.size() == 0) {
+        if (orders == null) {
             return new ResponseEntity(0, "order is null", "");
         }
         try {
             result = orderService.submit(orders, phone);
-            return new ResponseEntity(1, "订餐成功", result);
+            return new ResponseEntity(1, "预约成功", result);
         } catch (Exception e) {
             return new ResponseEntity(0, e.getMessage(), result);
         }

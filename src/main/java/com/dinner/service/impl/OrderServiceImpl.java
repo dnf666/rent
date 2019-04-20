@@ -7,7 +7,6 @@ import com.dinner.model.Cuisine;
 import com.dinner.model.Finance;
 import com.dinner.model.Order;
 import com.dinner.service.OrderService;
-import com.dinner.util.ArithUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -51,42 +50,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean submit(List<Cuisine> orders, String phone) {
+    public boolean submit(Cuisine orders, String phone) {
         Finance finance = new Finance();
-        Double total = 0d;
-        for (Cuisine cuisine : orders
-        ) {
-            if (cuisine.getNum() == 0) {
-                continue;
-            } else {
-                Double price = cuisine.getPrice();
-                Double num = (double) cuisine.getNum();
-                Double temp = ArithUtils.mul(price, num);
-                total = ArithUtils.add(total, temp);
-            }
-
-        }
         Calendar calendar = Calendar.getInstance();
-        Long timestemp = calendar.getTimeInMillis();
         Date date = calendar.getTime();
-        finance.setPrice(total);
-        finance.setOrderId(timestemp);
-        finance.setUserId(phone);
+        finance.setLocation(orders.getLocation());
+        finance.setPhone(phone);
         finance.setDate(date);
         financeMapper.insert(finance);
-        for (Cuisine cuisine : orders
-        ) {
-            if (cuisine.getNum() == 0) {
-                continue;
-            }
-            Order order = new Order();
-            order.setOrderId(timestemp);
-            order.setUserId(phone);
-            order.setName(cuisine.getLocation());
-            order.setNum(cuisine.getNum());
-            orderMapper.insert(order);
-        }
-
         return true;
     }
 

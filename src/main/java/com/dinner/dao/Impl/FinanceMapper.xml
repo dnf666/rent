@@ -2,89 +2,83 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dinner.dao.FinanceMapper" >
   <resultMap id="BaseResultMap" type="com.dinner.model.Finance" >
-    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
     <result column="date" property="date" jdbcType="DATE" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, user_id, date, price
+    id,location,phone,date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from finance
-    where order_id = #{orderId,jdbcType=INTEGER}
+    from rental
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <insert id="insert" parameterType="com.dinner.model.Finance" >
-    insert into finance (order_id, user_id, date,
-      price)
-    values (#{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{date,jdbcType=DATE},
-      #{price,jdbcType=DOUBLE})
+    insert into rental (location, phone,
+      date)
+    values (#{location,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}, #{date,jdbcType=DATE},
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dinner.model.Finance" >
-    insert into finance
+    insert into rental
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        order_id,
+      <if test="location != null" >
+        location,
       </if>
-      <if test="userId != null" >
-        user_id,
+      <if test="phone != null" >
+        phone,
       </if>
       <if test="date != null" >
         date,
       </if>
-      <if test="price != null" >
-        price,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
-        #{orderId,jdbcType=INTEGER},
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="phone!= null" >
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="date != null" >
         #{date,jdbcType=DATE},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=DOUBLE},
-      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.dinner.model.Finance" >
-    update finance
+    update rental
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="date != null" >
         date = #{date,jdbcType=DATE},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DOUBLE},
-      </if>
     </set>
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dinner.model.Finance" >
-    update finance
-    set user_id = #{userId,jdbcType=INTEGER},
+    update rental
+    set location = #{location,jdbcType=VARCHAR},
+           phone = #{phone,jdbcType=VARCHAR}
       date = #{date,jdbcType=DATE},
-      price = #{price,jdbcType=DOUBLE}
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByDateDesc" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from finance
+    from rental
     where date &gt;= #{startTime,jdbcType=DATE} AND date &lt;= #{endTime,jdbcType=DATE}
     order by date desc limit #{pager.offset},#{pager.limit}  ;
   </select>
   <select id="countByDateDesc" resultType="java.lang.Integer">
     select count(*)
-    from finance
+    from rental
     where date &gt;= #{startTime,jdbcType=DATE} AND date &lt;= #{endTime,jdbcType=DATE}
   </select>
 
