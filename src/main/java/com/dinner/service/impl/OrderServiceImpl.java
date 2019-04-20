@@ -50,14 +50,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean submit(Cuisine orders, String phone) {
-        Finance finance = new Finance();
+    public boolean submit(Finance orders, String phone) {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
-        finance.setLocation(orders.getLocation());
-        finance.setPhone(phone);
-        finance.setDate(date);
-        financeMapper.insert(finance);
+        orders.setDate(date);
+        orders.setPhone(phone);
+        financeMapper.insert(orders);
         return true;
     }
 

@@ -19,7 +19,7 @@
   <insert id="insert" parameterType="com.dinner.model.Finance" >
     insert into rental (location, phone,
       date)
-    values (#{location,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}, #{date,jdbcType=DATE},
+    values (#{location,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}, #{date,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dinner.model.Finance" >

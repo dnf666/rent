@@ -1,6 +1,6 @@
 package com.dinner.controller;
 
-import com.dinner.model.Cuisine;
+import com.dinner.model.Finance;
 import com.dinner.model.Order;
 import com.dinner.service.OrderService;
 import com.dinner.util.ResponseEntity;
@@ -28,7 +28,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("submit")
-    public ResponseEntity submit(@RequestBody Cuisine orders, String phone) {
+    public ResponseEntity submit(@RequestBody Finance orders, String phone) {
         boolean result = false;
         if (Strings.isNullOrEmpty(phone)) {
             return new ResponseEntity(0, "phone is null", "");

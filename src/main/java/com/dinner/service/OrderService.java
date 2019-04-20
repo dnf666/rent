@@ -1,6 +1,6 @@
 package com.dinner.service;
 
-import com.dinner.model.Cuisine;
+import com.dinner.model.Finance;
 import com.dinner.model.Order;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public interface OrderService extends BaseService<Order>{
-    boolean submit(Cuisine orders, String phone);
+    boolean submit(Finance orders, String phone);
 
     List<Order> selectByOrderIdAndUserId(Order order);
 }
