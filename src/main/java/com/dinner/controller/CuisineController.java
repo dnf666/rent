@@ -39,6 +39,8 @@ public class CuisineController {
      */
     @PostMapping("/filter")
     public ResponseEntity cuisineFilter(@RequestBody Cuisine cuisine,
+                                        Integer before,
+                                        Integer after,
                                         Integer page,
                                         Integer size
     ) {
@@ -46,7 +48,7 @@ public class CuisineController {
         pager.setCurrentPage(page);
         pager.setPageSize(size);
         try {
-            List<Cuisine> list = cuisineService.filter(pager, cuisine);
+            List<Cuisine> list = cuisineService.filter(pager,cuisine, before,after);
             for (Cuisine cuisine1 : list) {
                 String url = cuisine1.getUrl();
                 cuisine1.setUrl("/rent/"+url);
@@ -57,7 +59,6 @@ public class CuisineController {
             return new ResponseEntity(0, e.getMessage(), pager);
         }
     }
-
     /**
      * 点菜时显示菜单
      * @return

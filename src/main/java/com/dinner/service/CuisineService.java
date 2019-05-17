@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 public interface CuisineService extends BaseService<Cuisine>{
-    List<Cuisine> filter(Pager<Cuisine> pager, Cuisine cuisine) throws Exception;
+    List<Cuisine> filter(Pager<Cuisine> pager, Cuisine cuisine, Integer before,Integer after) throws Exception;
 
     void updatePhoto(Cuisine cuisine, MultipartFile file, HttpServletRequest request) throws IOException;
 

@@ -14,4 +14,6 @@ import java.util.List;
 
 public interface LoginService extends BaseService<Login> {
     List<Login> filter(Pager<Login> pager, Login login) throws Exception;
+
+    Login selectMessageByPhone(String phone);
 }

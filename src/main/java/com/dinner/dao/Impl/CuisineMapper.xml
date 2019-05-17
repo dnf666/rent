@@ -63,31 +63,43 @@
         others = #{others,jdbcType=VARCHAR}
     where location = #{location,jdbcType=VARCHAR}
   </update>
-    <select id="countCuisinesByKeys" parameterType="com.dinner.model.Cuisine" resultType="java.lang.Integer">
+    <select id="countCuisinesByKeys" resultType="java.lang.Integer">
         select count(*)
         from room where 1 = 1
-        <if test="location != null">
-            and room.location like '%${location}%'
+        <if test="cuisine.location != null">
+            and room.location like '%${cuisine.location}%'
         </if>
-        <if test="roomOwner != null">
-            and room.room_owner like '%${roomOwner}%'
+        <if test="cuisine.phone != null">
+            and room.phone = #{cuisine.phone}
         </if>
-        <if test="others != null">
-            and room.others like '%${others}%'
+        <if test="cuisine.others != null">
+            and room.others like '%${cuisine.others}%'
+        </if>
+        <if test="before != null">
+            and room.price &gt;= #{before}
+        </if>
+        <if test="after != null">
+            and room.price &lt;= #{after}
         </if>
     </select>
-    <select id="filter" parameterType="com.dinner.model.Cuisine" resultMap="BaseResultMap">
+    <select id="filter" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from room where 1 = 1
       <if test="cuisine.location != null">
             and room.location like '%${cuisine.location}%'
         </if>
-        <if test="cuisine.roomOwner != null">
-            and room.room_owner like '%${cuisine.roomOwner}%'
+        <if test="cuisine.phone != null">
+            and room.phone = #{cuisine.phone}
         </if>
         <if test="cuisine.others != null">
             and room.others like '%${cuisine.others}%'
+        </if>
+        <if test="before != null">
+            and room.price &gt;= #{before}
+        </if>
+        <if test="after != null">
+            and room.price &lt;= #{after}
         </if>
         <if test="pager.offset!=null and pager.limit!=null">
             limit #{pager.offset},#{pager.limit};

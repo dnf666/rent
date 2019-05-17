@@ -20,9 +20,9 @@ public interface CuisineMapper {
 
     int updateByPrimaryKey(Cuisine record);
 
-    Integer countCuisinesByKeys(Cuisine cuisine);
+    Integer countCuisinesByKeys(@Param("cuisine") Cuisine cuisine, @Param("before") Integer before,@Param("after") Integer after);
 
-    List<Cuisine> filter(@Param("pager") Pager<Cuisine> pager, @Param("cuisine") Cuisine cuisine);
+    List<Cuisine> filter(@Param("pager") Pager<Cuisine> pager, @Param("cuisine") Cuisine cuisine,@Param("before") Integer before,@Param("after") Integer after);
 
     List<Cuisine> selectAll();
 }

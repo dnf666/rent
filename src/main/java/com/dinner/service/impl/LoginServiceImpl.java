@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public int deleteByPrimaryKey(Login key) {
-        return 0;
+        return loginMapper.deleteByPrimaryKey(key.getPhone());
     }
 
     @Override
@@ -58,5 +58,10 @@ public class LoginServiceImpl implements LoginService {
         } else {
             throw new Exception("数据为空");
         }
+    }
+
+    @Override
+    public Login selectMessageByPhone(String phone) {
+        return loginMapper.selectByPrimaryKey(phone);
     }
 }
